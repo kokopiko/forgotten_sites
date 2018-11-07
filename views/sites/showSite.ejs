@@ -1,0 +1,74 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!LEFT COLUMN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+        <div class="col-md-3">
+            <ul>
+                <li>Test1</li>
+                <li>Test2</li>
+                <li>Test3</li>
+            </ul>
+        </div>
+        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RIGHT COLUMN !!!!!!!!!!!!!!!!!!!!!!!-->
+        <div class="col-md-9">
+            <!--!!!!!!!!!!!!!!!!!!!! IMAGE-->
+            <div class="border border-secondary p-2">
+                <img class="img-fluid" src=<%= site.image %>>
+                <div>
+                    
+                    <!--!!!!!!!!!!!!!!!!!!!!!! Site details-->
+                    <h4 class="text-primary"><%=site.name %></h2>
+                    <p><%= site.description %> by <%= site.addedBy.username %></p>
+                    
+                    <!--!!!!!!!!!!!!!!!!!!!!!!!!!! EDIT and DELETE Site-->
+                    <% if (currentUser && site.addedBy._id.equals(currentUser._id)){%> 
+                        <a class="btn btn-sm btn-warning" href="/sites/<%= site.id %>/edit"><i class="fas fa-edit"></i> Edit site </a>
+                        <form class="one-btn-form" method="POST" action="/sites/<%= site._id %>/delete?_method=DELETE">
+                            <button class="btn btn-sm btn-danger"><i class="fas fa-times"></i> Delete site</button>
+                        </form>
+                    <% } %>
+                    
+                    
+                    <!--!!!!!!!!!!!!!!Show add comment button if logged in-->
+                    <div>
+                        <% if (currentUser){ %>
+                            <button data-toggle="collapse" id="comment-button" class="btn btn-success mt-2" data-target="#add-comment-collapse"><strong>+</strong> Add new comment</button>
+                            <div id="add-comment-collapse" class="card collapse">
+                                <div class="card-header">
+                                    <h5>Add comment <i class="fas fa-comment-dots"></i></h5>
+                                </div>
+                                <div class="card-body">
+                                    <form method="POST" action="/sites/<%= site.id %>/comments">
+                                        Write your comment:
+                                        <input class="form-control" type="text" placeholder="<%= currentUser.username%>" readonly>
+                                        <textarea class="form-control mt-3" rows="3" name="comment[content]">Add new comment here....</textarea>
+                                        <button type="submit" class="btn btn-sm btn-success mt-3">Add comment <i class="fas fa-comment"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                        
+                    <!--!!!!!!!!!!!!!!!!!!!!!!!!!! Comments-->
+                    <% if (site.comments.length>0){ %>
+                    <div class="border border-success mt-3 pt-2">
+                        <% site.comments.forEach(function(item){ %>
+                            <div class="p-1">
+                                <form class="one-btn-form" method="POST" action="/sites/<%= site._id %>/comments/<%= item._id %>/delete?_method=DELETE">
+                                    <p><b><%= item.author.username %> - </b><%= item.content %> - <%= item.date.toString() %>
+                                    <a class="btn btn-warning btn-sm " href="/sites/<%= site._id %>/comments/<%= item._id%>/edit"><i class="fas fa-edit"></i></a>
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+                                </form></p>
+                                <hr>
+                            </div>
+                        <% }); %>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div> 
+<% include ../partials/footer %>

@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+<div class="container">
+    <form method="POST" action="/sites/<%= site.id %>/comments">
+        <div class="form-group w-50 mx-auto">
+            <h2>New comment for <%= site.name %> as <%= currentUser.username %></h2>
+            <div class="img-thumbnail">
+                <img class="img-fluid" src=<%= site.image %>>
+            </div>
+            <input class="form-control mt-5 mb-3" type="text" name="comment[content]" placeholder="Comment text">
+            <input class="btn btn-primary mb-3 btn-block" type="submit">
+            <a class="btn btn-primary btn-m" href="/sites">Go back!</a> 
+        </div>
+    </form>
+</div>
+<% include ../partials/footer %>

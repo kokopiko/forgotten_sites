@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+<div class="container">
+    <form enctype="application/json" method="POST" action="/sites/<%= site._id %>?_method=PUT">
+        <div class="form-group w-50 mx-auto">
+            <h2>Edit <%= site.name %></h2>
+            <div class="img-thumbnail">
+                <img class="img-fluid" src=<%= site.image %>>
+            </div>
+            <input class="form-control mt-5 mb-3" type="text" name="site[name]" value="<%= site.name %>">
+            <input class="form-control mb-3" type="text" name="site[image]" value="<%= site.image %>">
+            <input class="form-control mb-3" type="text" name="site[description]" value="<%= site.description %>">
+            <input class="btn btn-primary mb-3 btn-block" type="submit">
+            <a class="btn btn-primary btn-m" href="/sites">Go back!</a>
+        </div>
+    </form>
+</div>
+<% include ../partials/footer %>

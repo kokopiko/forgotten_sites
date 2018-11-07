@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+<div class="container">
+    <form enctype="application/json" method="POST" action="/sites/<%= site_id %>/comments/<%= comment._id %>?_method=PUT">
+        <div class="form-group w-50 mx-auto">
+            <div class="img-thumbnail">
+                <!--<img class="img-fluid" src=<%=  %>>-->
+                image will go here
+            </div>
+            <input class="form-control mt-5 mb-3" type="text" name="comment[content]" value="<%= comment.content %>">
+            <input class="btn btn-primary mb-3 btn-block" type="submit">
+            <a class="btn btn-primary btn-m" href="/sites/<%= site_id %>">Go back!</a> 
+        </div>
+    </form>
+</div>
+<% include ../partials/footer %>

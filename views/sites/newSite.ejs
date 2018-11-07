@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+<div class="container">
+    <form method="POST" action="/sites">
+        <div class="form-group w-50 mx-auto">
+            <input class="form-control mt-5 mb-3" type="text" name="site[name]" placeholder="SiteName">
+            <input class="form-control mb-3" type="text" name="site[image]" placeholder="imageUrl">
+            <input class="form-control mb-3" type="text" name="site[description]" placeholder="Description">
+            <input class="btn btn-primary mb-3 btn-block" type="submit">
+            <a class="btn btn-primary btn-m" href="/sites">Go back!</a>
+        </div>
+    </form>
+</div>
+<% include ../partials/footer %>
